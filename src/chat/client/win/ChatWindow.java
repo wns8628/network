@@ -99,7 +99,7 @@ public class ChatWindow {
 			}
 			String msgdata = "message" + ":" + msg;						
 			pw.println(msgdata);
-
+			textField.setText("");
 		
 		} catch (IOException e) {
 			e.printStackTrace();

@@ -8,7 +8,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 public class ChatClientApp {
-	private static final String SERVER_IP = "218.39.221.93";
+	private static final String SERVER_IP = "192.168.200.111";
 	private static final int SERVER_PORT = 5000;
 	public static void main(String[] args) {
 		String name = null;

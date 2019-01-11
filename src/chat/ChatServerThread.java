@@ -104,11 +104,7 @@ public class ChatServerThread extends Thread {
 	private void broadcast( String data ) { //모든 pw에 다보낸다 메세지를 ㅇㅋ ? 
 		   synchronized( listWriters ) {
 			   for( Writer writer : listWriters ) {
-				   System.out.println("%$^$%^%^%$^%$^");
    				   ((PrintWriter) writer).println(data);
-//			   PrintWriter printWriter = (PrintWriter)writer;
-//			   printWriter.println( data );
-//			   printWriter.flush();
 		      }
 		   }
 	}
@@ -121,21 +117,27 @@ public class ChatServerThread extends Thread {
 	}	
 	//------------------------------------------------------처리 메소드
 	
-	private void doJoin(String nickName, Writer writer) {  //회원가입이면
-		this.nickname = nickName;  //닉네임설정하고
+	//채팅방 접속
+	private void doJoin(String nickName, Writer writer) {  
+		//1.닉네임설정하고
+		this.nickname = nickName;  
+				
+		//2.브로드캐스트
 		String data = nickName + "님이 참여하셨습니다.";
-		broadcast(data); 		    // 추가한걸로 참여했다를 브로드 캐스트한다.	
+		broadcast(data); 		    	
 		
-		addWriter( writer );		    // pw추가  			
+		//3. pw추가
+		addWriter( writer );		      	
+		
+		//4. ack 
 		((PrintWriter) writer).println("join:ok");
 		try {
 			writer.flush();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		
+		}		
 	}
+	
 	private void doQuit(Writer writer) {
 		removeWriter( writer );
 	   String data = nickname + "님이 퇴장 하였습니다."; 
